@@ -3,14 +3,28 @@
 <head>
   <meta charset="UTF-8">
   <title>Fantasy RPG 3D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <style>
-    body { margin: 0; overflow: hidden; background: #87ceeb; }
-    canvas { display: block; }
+    body { margin: 0; overflow: hidden; background: #7ec850; }
+    canvas { display: block; background: url('assets/grass.png') repeat; }
+    #rotate-message {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: sans-serif;
+      font-size: 24px;
+      background: rgba(0,0,0,0.7);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
+  <div id="rotate-message">Sila pusingkan telefon ke potret!</div>
   <canvas id="gameCanvas"></canvas>
-
   <script src="main.js"></script>
 </body>
 </html>
