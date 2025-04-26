@@ -1,89 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>BACHELOR'S THESIS</title>
-
-  <!-- Favicon -->
-  <link rel="icon" href="assets/favicon.png" type="image/png">
-
-  <!-- SEO Meta -->
-  <meta name="description" content="Bachelor's Thesis Project: 3D Web Game Experience">
-  <meta name="keywords" content="3D Game, WebGL, Bachelor's Thesis, Online Game, Fantasy Project">
-  <meta name="author" content="Mohd Sah">
-
-  <!-- Open Graph (for social media) -->
-  <meta property="og:title" content="Bachelor's Thesis 3D Project" />
-  <meta property="og:description" content="Experience a 3D fantasy world directly on your browser." />
-  <meta property="og:image" content="assets/preview.png" />
-  <meta property="og:url" content="https://your-site-name.netlify.app/" />
-  <meta property="og:type" content="website" />
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Run Attack</title>
   <style>
-    body, html {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background: #222;
-      color: white;
-      font-family: Arial, sans-serif;
-    }
-    #loading {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: #111;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 24px;
-      z-index: 10;
-    }
+    body { margin: 0; overflow: hidden; background: #222; }
     #fullscreenBtn {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      padding: 10px 20px;
-      background: #4CAF50;
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      z-index: 5;
+      position: absolute; bottom: 20px; right: 20px; padding: 10px 20px;
+      background: #4CAF50; color: white; border: none; border-radius: 10px;
+      font-size: 16px; cursor: pointer;
     }
   </style>
 </head>
 <body>
-
-<div id="loading">Loading game...</div>
-
-<canvas id="gameCanvas"></canvas>
-<button id="fullscreenBtn">Fullscreen</button>
-
-<script src="main.js"></script>
-<script>
-  window.onload = function() {
-    document.getElementById('loading').style.display = 'none';
-  };
-
-  document.getElementById('fullscreenBtn').addEventListener('click', function() {
-    if (document.documentElement.requestFullscreen) {
-      document.documentElement.requestFullscreen();
-    } else if (document.documentElement.webkitRequestFullscreen) {
-      document.documentElement.webkitRequestFullscreen();
-    } else if (document.documentElement.msRequestFullscreen) {
-      document.documentElement.msRequestFullscreen();
-    }
-  });
-
-  if (screen.orientation && screen.orientation.lock) {
-    screen.orientation.lock('portrait').catch(function(error) {
-      console.warn('Orientation lock not allowed:', error);
-    });
-  }
-</script>
-
+  <button id="fullscreenBtn">Fullscreen</button>
+  <script type="module" src="main.js"></script>
 </body>
 </html>

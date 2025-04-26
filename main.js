@@ -1,70 +1,48 @@
-const canvas = document.getElementById('gameCanvas');
-const ctx = canvas.getContext('2d');
-const rotateMessage = document.getElementById('rotate-message');
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.161.0/examples/jsm/controls/OrbitControls.js';
 
-function resizeCanvas() {
-  if (window.innerWidth < window.innerHeight) {
-    // Portrait
-    rotateMessage.style.display = 'none';
-    canvas.style.display = 'block';
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  } else {
-    // Landscape
-    rotateMessage.style.display = 'block';
-    canvas.style.display = 'none';
-  }
-}
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x222222);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-window.addEventListener('resize', resizeCanvas);
-window.addEventListener('orientationchange', resizeCanvas);
+const light = new THREE.HemisphereLight(0xffffff, 0x444444);
+light.position.set(0, 20, 0);
+scene.add(light);
 
-resizeCanvas(); // Initial call
-
-// Player object
-const player = {
-  x: window.innerWidth / 2,
-  y: window.innerHeight / 2,
-  width: 32,
-  height: 48,
-  speed: 3,
-  sprite: new Image()
-};
-
-player.sprite.src = 'assets/player.png';
-
-// Key press tracking
-const keys = {};
-
-window.addEventListener('keydown', (e) => {
-  keys[e.key] = true;
+const loader = new GLTFLoader();
+loader.load('assets/model.glb', function(gltf) {
+    scene.add(gltf.scene);
+    gltf.scene.scale.set(1, 1, 1);
+}, undefined, function(error) {
+    console.error(error);
 });
 
-window.addEventListener('keyup', (e) => {
-  keys[e.key] = false;
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.target.set(0, 1, 0);
+controls.update();
+
+camera.position.set(0, 1.6, 3);
+
+function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
 });
 
-// Draw player function
-function drawPlayer() {
-  ctx.drawImage(player.sprite, player.x, player.y, player.width, player.height);
-}
-
-// Game loop
-function gameLoop() {
-  if (canvas.style.display !== 'none') {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Move player
-    if (keys['ArrowUp'] || keys['w']) player.y -= player.speed;
-    if (keys['ArrowDown'] || keys['s']) player.y += player.speed;
-    if (keys['ArrowLeft'] || keys['a']) player.x -= player.speed;
-    if (keys['ArrowRight'] || keys['d']) player.x += player.speed;
-
-    // Draw player
-    drawPlayer();
-  }
-
-  requestAnimationFrame(gameLoop);
-}
-
-gameLoop();
+document.getElementById('fullscreenBtn').addEventListener('click', () => {
+    if (!document.fullscreenElement) {
+        document.body.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+});
