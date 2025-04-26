@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Download Assets</title>
+</head>
+<body>
+  <h1>Download Assets for BACHELOR'S THESIS Project</h1>
+  <button onclick="downloadGrass()">Download Grass</button>
+  <button onclick="downloadPlayer()">Download Player</button>
+
+  <script>
+    function downloadBase64(filename, base64) {
+      const link = document.createElement('a');
+      link.href = base64;
+      link.download = filename;
+      link.click();
+    }
+
+    function downloadGrass() {
+      downloadBase64('grass.png', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAABWUlEQVR4nO3XsQ3CMAwF0P9v2s0E+vZCkCJHfZxFDmN+PAZbuJQAAAAAAAAAAAAAAAGAuRUiZxgT0UO4vCd7eCAvuGm7A0rxAne2KYeE3KCdMhzErAg7AGn9RPqAOmRBL5vH5iY8Q4hYFrgeA06kYZJw3j1cnshcoVBRF3FMryOqR6ik5FsIUyhfVEH6PYaY9VW/0w6nZk4HplH7/hdwdNNDuAgAAAAAAAAAAAAAAwD/6AKhxnyN6K44DAAAAAElFTkSuQmCC');
+    }
+
+    function downloadPlayer() {
+      downloadBase64('player.png', 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABGklEQVR4nO3VvQkCQRCA4e9Mu0MwEUWjWbMG4gJltIsGizDJMwE3VdYhJXfS7V5Qe6v51Vrvf2Y4zLEg1VxJYVwRJvTWAKfx1v0uAJ/Ml+SK1J0HATPl2HxgBHeS5PMtdZ4AxEk6owF13MgkmjkGAeI2Z4AFLOlEQ5khchYADtY5whcM0gfqMJvUPRRwPDTm5jDZHLIMoRM0j7fymBdYOwDi09gI+06AEJid5hD/X+UwbcklIv2Chpx7OgDbAAAAAElFTkSuQmCC');
+    }
+  </script>
+</body>
+</html>
